@@ -1,0 +1,9 @@
+.claude/
+node_modules/
+# earlier banner experiments, not used by the site
+anime_background_3072x1024.png
+anime_banner_1500x500.gif
+banner_1500x500.gif
+white_banner_1500x500.gif
+fap_1500x500.gif
+fap_crowd_1500x500.gif
