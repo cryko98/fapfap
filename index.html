@@ -39,7 +39,14 @@
     padding: 10px 16px; font-size: 22px; letter-spacing: .5px; white-space: nowrap;
     box-shadow: 5px 5px 0 var(--ink);
   }
+  .ca { font-family: inherit; color: var(--ink); cursor: pointer; min-width: 0; }
+  .ca:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
   .ca b { color: var(--pink); -webkit-text-stroke: 1px var(--ink); }
+  .ca .short { display: none; }
+  @media (max-width: 1000px) {
+    .ca .full { display: none; }
+    .ca .short { display: inline; }
+  }
 
   main { position: relative; z-index: 1; padding-top: 92px; }
   .hero { position: relative; z-index: 5; display: flex; justify-content: center; padding: 24px 16px; }
@@ -96,7 +103,7 @@
     <a class="x" href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
     </a>
-    <div class="ca">CA: <b>coming soon</b></div>
+    <button class="ca" type="button" title="Copy CA" data-ca="FXmXWbWDZjaTkYyKABoGrdTLTYULZ4Vf3dUuPHifpump">CA: <b><span class="full">FXmXWbWDZjaTkYyKABoGrdTLTYULZ4Vf3dUuPHifpump</span><span class="short">FXmX…pump</span></b></button>
   </div>
 </header>
 
@@ -191,6 +198,16 @@
       document.body.appendChild(el);
       el.addEventListener('animationend', () => el.remove());
     }
+  });
+
+  // click the CA box to copy the address
+  const ca = document.querySelector('.ca');
+  ca.addEventListener('click', () => {
+    navigator.clipboard?.writeText(ca.dataset.ca).then(() => {
+      const b = ca.querySelector('b'), old = b.innerHTML;
+      b.textContent = 'copied!';
+      setTimeout(() => { b.innerHTML = old; }, 1200);
+    });
   });
 
   let t;
